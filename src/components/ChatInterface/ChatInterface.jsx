@@ -111,6 +111,9 @@ const ChatInterface = ({ healthData, isAuthenticated = false, onLoginRequest }) 
   const [showPopup, setShowPopup] = useState(false);
   const [hasShownPopup, setHasShownPopup] = useState(false);
   const [showEmergencyModal, setShowEmergencyModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
 
   const [hasShownLoginPrompt, setHasShownLoginPrompt] = useState(false);
   const [isGeneratingResponse, setIsGeneratingResponse] = useState(false);
@@ -136,6 +139,49 @@ const ChatInterface = ({ healthData, isAuthenticated = false, onLoginRequest }) 
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Search functionality
+  const handleSearch = async () => {
+    if (!searchQuery.trim()) {
+      setSearchResults([]);
+      setIsSearching(false);
+      return;
+    }
+
+    setIsSearching(true);
+    
+    try {
+      // Search through existing messages
+      const filteredMessages = messages.filter(message => 
+        message.text.toLowerCase().includes(searchQuery.toLowerCase()) &&
+        message.sender === 'bot'
+      );
+      
+      setSearchResults(filteredMessages);
+      
+      // If no results in existing messages, you could search external APIs here
+      if (filteredMessages.length === 0) {
+        // You could implement external search here
+        console.log('No existing messages found, could search external APIs');
+      }
+    } catch (error) {
+      console.error('Search error:', error);
+    } finally {
+      setIsSearching(false);
+    }
+  };
+
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      if (searchQuery) {
+        handleSearch();
+      } else {
+        setSearchResults([]);
+      }
+    }, 300);
+
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchQuery]);
 
   // Copy to clipboard function
   const handleCopy = async (text, messageId) => {
@@ -1535,7 +1581,7 @@ Feel free to ask me any health-related questions, and I'll provide detailed, per
           </button>
         </div>
         
-          <div className="chat-title">
+        <div className="chat-title">
           <h2>Medikami</h2>
           <p>{t.subtitle}</p>
         </div>
@@ -1543,13 +1589,70 @@ Feel free to ask me any health-related questions, and I'll provide detailed, per
         <div className="header-actions">
           <button 
             className="emergency-btn" 
-              onClick={openEmergencyModal}
+            onClick={openEmergencyModal}
             title="Emergency Help"
           >
             🚨 Emergency
           </button>
         </div>
       </div>
+
+      {/* Mobile Search Bar */}
+      <div className="mobile-search-container">
+        <div className="search-input-container">
+          <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="M21 21l-4.35-4.35"></path>
+          </svg>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search in chat..."
+            className="mobile-search-input"
+          />
+          {searchQuery && (
+            <button 
+              className="clear-search-btn"
+              onClick={() => setSearchQuery('')}
+              title="Clear search"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Search Results */}
+      {searchResults.length > 0 && (
+        <div className="search-results">
+          <div className="search-results-header">
+            <h4>Search Results ({searchResults.length})</h4>
+            <button 
+              className="close-search-btn"
+              onClick={() => setSearchQuery('')}
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <div className="search-results-list">
+            {searchResults.map((message, index) => (
+              <div key={`search-${message.id}-${index}`} className="search-result-item">
+                <div className="search-result-text">
+                  {message.text.substring(0, 150)}...
+                </div>
+                <div className="search-result-time">{message.timestamp}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="chat-container">
         <div className="chat-messages">

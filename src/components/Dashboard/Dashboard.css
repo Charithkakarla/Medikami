@@ -240,15 +240,50 @@
     padding: 0 15px;
     height: 50px;
     background: #000000;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    flex-shrink: 0;
   }
 
   .logo h1 {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   
   .logo-image {
-    width: 38px;
-    height: 38px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    padding: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar-toggle:hover {
+    background: var(--bg-secondary);
+    color: var(--accent-color);
   }
 
   .sidebar {
@@ -258,6 +293,14 @@
     height: calc(100vh - 50px);
     z-index: 50;
     width: 280px;
+    background: var(--bg-secondary);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: 1px solid var(--border-color);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
   }
 
   .sidebar-overlay {
@@ -272,6 +315,10 @@
     padding: 10px 14px;
     font-size: 0.85rem;
   }
+
+  .main-content {
+    height: calc(100vh - 50px);
+  }
 }
 
 @media (min-width: 769px) {
@@ -285,5 +332,48 @@
 
   .sidebar-toggle {
     display: none;
+  }
+}
+
+/* Additional mobile improvements */
+@media (max-width: 480px) {
+  .dashboard-header {
+    padding: 0 10px;
+    height: 45px;
+  }
+
+  .header-left {
+    gap: 8px;
+  }
+
+  .header-right {
+    gap: 6px;
+  }
+
+  .logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .logo-image {
+    width: 28px;
+    height: 28px;
+  }
+
+  .auth-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .user-profile {
+    gap: 6px;
+  }
+
+  .profile-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .user-name-display {
+    font-size: 0.8rem;
   }
 } 

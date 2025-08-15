@@ -1096,127 +1096,6 @@ button:focus {
   outline: none;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-  .chat-interface.premium-dark {
-    height: 100vh;
-  }
-  
-  .chat-header {
-    padding: 1rem;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  
-  .header-left {
-    order: 1;
-    justify-content: center;
-  }
-  
-  .chat-title {
-    order: 2;
-  }
-  
-  .header-actions {
-    order: 3;
-    justify-content: center;
-  }
-  
-  .chat-title h2 {
-    font-size: 1.25rem;
-  }
-  
-  .chat-messages {
-    padding: 1rem;
-  }
-  
-  .message-content {
-    max-width: 85%;
-  }
-  
-  .quick-actions {
-    padding: 1rem;
-  }
-  
-  .quick-action-btn {
-    font-size: 0.8rem;
-    padding: 0.5rem 1rem;
-  }
-  
-  .chat-input {
-    padding: 1rem;
-  }
-  
-  .login-prompt {
-    width: 95%;
-    padding: 2rem;
-  }
-  
-  .login-btn-primary,
-  .signup-btn {
-    width: 100%;
-    max-width: 250px;
-  }
-  
-  .emergency-btn {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8rem;
-  }
-  
-  .feedback-buttons {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
-  }
-  
-  .feedback-text {
-    font-size: 0.75rem;
-  }
-  
-  .feedback-btn {
-    font-size: 0.9rem;
-    min-width: 28px;
-    height: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-  .header-actions {
-    gap: 0.5rem;
-  }
-  
-  .new-chat-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    gap: 0.3rem;
-  }
-  
-  .message-content {
-    max-width: 90%;
-  }
-  
-  .input-container {
-    gap: 0.5rem;
-    padding: 0.5rem;
-  }
-  
-  .attach-btn,
-  .voice-btn {
-    padding: 0.4rem;
-  }
-  
-  .send-btn {
-    padding: 0.4rem;
-  }
-  
-  .attach-btn-icon,
-  .voice-btn-icon {
-    width: 24px;
-    height: 24px;
-  }
-} 
-
-
 /* Medikami Popup Modal */
 .popup-overlay {
   position: fixed;
@@ -1613,3 +1492,290 @@ button:focus {
     height: 10px;
   }
 }
+
+/* Mobile Search Styles */
+.mobile-search-container {
+  display: none;
+  padding: 0.75rem 1rem;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.search-input-container:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
+.search-icon {
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.mobile-search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  outline: none;
+  padding: 0.25rem;
+}
+
+.mobile-search-input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.clear-search-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clear-search-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+/* Search Results */
+.search-results {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.search-results-header h4 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.close-search-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  padding: 0.25rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-search-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+.search-results-list {
+  padding: 0.5rem 0;
+}
+
+.search-result-item {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-text {
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+}
+
+.search-result-time {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chat-interface.premium-dark {
+    height: 100vh;
+  }
+  
+  .chat-header {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: auto;
+    min-height: 60px;
+  }
+  
+  .header-left {
+    order: 1;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .chat-title {
+    order: 2;
+  }
+  
+  .header-actions {
+    order: 3;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .chat-title h2 {
+    font-size: 1.25rem;
+  }
+  
+  .chat-title p {
+    font-size: 0.8rem;
+  }
+  
+  .mobile-search-container {
+    display: block;
+  }
+  
+  .chat-messages {
+    padding: 1rem;
+    height: calc(100vh - 200px);
+  }
+  
+  .message-content {
+    max-width: 85%;
+  }
+  
+  .quick-actions {
+    padding: 1rem;
+  }
+  
+  .quick-action-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .chat-input {
+    padding: 1rem;
+  }
+  
+  .login-prompt {
+    width: 95%;
+    padding: 2rem;
+  }
+  
+  .login-btn-primary,
+  .signup-btn {
+    width: 100%;
+    max-width: 250px;
+  }
+  
+  .emergency-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  .feedback-buttons {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+  
+  .feedback-text {
+    font-size: 0.75rem;
+  }
+  
+  .feedback-btn {
+    font-size: 0.9rem;
+    min-width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-actions {
+    gap: 0.5rem;
+  }
+  
+  .new-chat-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.3rem;
+  }
+  
+  .message-content {
+    max-width: 90%;
+  }
+  
+  .input-container {
+    gap: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  .attach-btn,
+  .voice-btn {
+    padding: 0.4rem;
+  }
+  
+  .send-btn {
+    padding: 0.4rem;
+  }
+  
+  .attach-btn-icon,
+  .voice-btn-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .mobile-search-container {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .search-input-container {
+    padding: 0.4rem 0.6rem;
+  }
+  
+  .mobile-search-input {
+    font-size: 0.85rem;
+  }
+  
+  .search-results-header {
+    padding: 0.5rem 0.75rem;
+  }
+  
+  .search-result-item {
+    padding: 0.5rem 0.75rem;
+  }
+} 
