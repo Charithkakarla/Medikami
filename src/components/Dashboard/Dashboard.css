@@ -340,14 +340,21 @@
   .dashboard-header {
     padding: 0 10px;
     height: 45px;
+    flex-direction: row !important;
+    justify-content: space-between !important;
   }
 
   .header-left {
     gap: 8px;
+    flex: 1;
+    justify-content: flex-start;
   }
 
   .header-right {
     gap: 6px;
+    flex-shrink: 0;
+    justify-content: flex-end !important;
+    margin-left: auto;
   }
 
   .logo h1 {
@@ -362,10 +369,12 @@
   .auth-btn {
     padding: 6px 12px;
     font-size: 0.8rem;
+    margin-left: auto;
   }
 
   .user-profile {
     gap: 6px;
+    margin-left: auto;
   }
 
   .profile-icon {
@@ -375,5 +384,35 @@
 
   .user-name-display {
     font-size: 0.8rem;
+  }
+  
+  /* Hide profile dropdown on mobile */
+  .profile-dropdown {
+    display: none !important;
+  }
+  
+  /* Hide dropdown arrow on mobile */
+  .dropdown-arrow {
+    display: none !important;
+  }
+  
+  /* Make profile icon non-clickable on mobile */
+  .profile-icon-container {
+    pointer-events: none;
+  }
+  
+  /* Hide sidebar toggle button on mobile */
+  .sidebar-toggle {
+    display: none !important;
+  }
+  
+  /* Hide sidebar completely on mobile */
+  .sidebar {
+    display: none !important;
+  }
+  
+  /* Hide sidebar overlay on mobile */
+  .sidebar-overlay {
+    display: none !important;
   }
 } 
